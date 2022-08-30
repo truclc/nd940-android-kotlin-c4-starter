@@ -1,18 +1,26 @@
 package com.udacity.project4.locationreminders.reminderslist
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.databinding.DataBindingUtil
+import com.firebase.ui.auth.AuthUI
+import com.google.android.material.snackbar.Snackbar
 import com.udacity.project4.R
+import com.udacity.project4.authentication.AuthenticationActivity
 import com.udacity.project4.base.BaseFragment
 import com.udacity.project4.base.NavigationCommand
 import com.udacity.project4.databinding.FragmentRemindersBinding
+import com.udacity.project4.locationreminders.ReminderDescriptionActivity
 import com.udacity.project4.utils.setDisplayHomeAsUpEnabled
 import com.udacity.project4.utils.setTitle
 import com.udacity.project4.utils.setup
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReminderListFragment : BaseFragment() {
+    private val TAG = "ReminderListFragment"
+
     //use Koin to retrieve the ViewModel instance
     override val _viewModel: RemindersListViewModel by viewModel()
     private lateinit var binding: FragmentRemindersBinding
@@ -31,7 +39,10 @@ class ReminderListFragment : BaseFragment() {
         setDisplayHomeAsUpEnabled(false)
         setTitle(getString(R.string.app_name))
 
-        binding.refreshLayout.setOnRefreshListener { _viewModel.loadReminders() }
+        binding.refreshLayout.setOnRefreshListener {
+            _viewModel.loadReminders()
+            binding.refreshLayout.isRefreshing = false
+        }
 
         return binding.root
     }
@@ -61,7 +72,10 @@ class ReminderListFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView() {
+        Log.d(TAG, "setupRecyclerView: ")
         val adapter = RemindersListAdapter {
+            Log.d(TAG, "setupRecyclerView: startActivity called")
+            startActivity(ReminderDescriptionActivity.newIntent(requireContext(), it))
         }
 
 //        setup the recycler view using the extension function
@@ -71,7 +85,23 @@ class ReminderListFragment : BaseFragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logout -> {
-//                TODO: add the logout implementation
+                //Add the logout implementation
+                AuthUI.getInstance().signOut(requireContext())
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            val intent =
+                                Intent(requireContext(), AuthenticationActivity::class.java)
+                            startActivity(intent)
+                            requireActivity().finish()
+                        } else {
+                            Snackbar.make(
+                                requireView(),
+                                getString(R.string.error_login),
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+
+                    }
             }
         }
         return super.onOptionsItemSelected(item)
