@@ -59,7 +59,7 @@ class RemindersLocalRepositoryTest {
         val reminder = ReminderDTO(title, des, location, latLng.latitude, latLng.longitude)
         remindersLocalRepository.saveReminder(reminder)
 
-        //Condition: Get the reminder by id from the database.
+        //Execute: Get the reminder by id from the database.
         val result = remindersLocalRepository.getReminder(reminder.id)
 
         //Verify: The result data contains the expected values.
@@ -75,7 +75,7 @@ class RemindersLocalRepositoryTest {
 
     @Test
     fun getReminder_idNotFound() = runBlocking {
-        //Condition: Get the reminder by id from the database.
+        //Execute: Get the reminder by id from the database.
         val result = remindersLocalRepository.getReminder("-1")
         result as Result.Error
         //Verify: return error message
@@ -92,7 +92,7 @@ class RemindersLocalRepositoryTest {
         val reminder = ReminderDTO(title, des, location, latLng.latitude, latLng.longitude)
         remindersLocalRepository.saveReminder(reminder)
 
-        //Condition: Delete all reminder from the database.
+        //Execute: Delete all reminder from the database.
         remindersLocalRepository.deleteAllReminders()
 
         //Verify: The result data is empty

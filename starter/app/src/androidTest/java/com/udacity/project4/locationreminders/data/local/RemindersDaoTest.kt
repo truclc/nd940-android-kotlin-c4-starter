@@ -53,7 +53,7 @@ class RemindersDaoTest {
         val reminder = ReminderDTO(title, des, location, latLng.latitude, latLng.longitude)
         database.reminderDao().saveReminder(reminder)
 
-        //Condition: Get the reminder by id from the database.
+        //Execute: Get the reminder by id from the database.
         val result = database.reminderDao().getReminderById(reminder.id)
 
         //Verify: The result data contains the expected values.
@@ -85,7 +85,7 @@ class RemindersDaoTest {
         database.reminderDao().saveReminder(reminder2)
         database.reminderDao().saveReminder(reminder3)
 
-        //Condition: Delete all the reminders from the database.
+        //Execute: Delete all the reminders from the database.
         database.reminderDao().deleteAllReminders()
 
         //Verify: The result data is empty

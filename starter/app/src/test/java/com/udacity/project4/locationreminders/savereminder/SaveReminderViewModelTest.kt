@@ -67,7 +67,7 @@ class SaveReminderViewModelTest {
         //Pause dispatcher so you can verify initial values.
         mainCoroutineRule.pauseDispatcher()
 
-        //Condition: Save reminder
+        //Execute: Save reminder
         val reminderData = ReminderDataItem(
             title,
             des, location, latLng.latitude, latLng.longitude
@@ -88,7 +88,7 @@ class SaveReminderViewModelTest {
             title,
             des, location, latLng.latitude, latLng.longitude
         )
-        //Condition: save reminder
+        //Execute: save reminder
         saveReminderViewModel.saveReminder(reminderData)
         val remindersList = (reminderDataSource.getReminders() as Result.Success).data
         val item = remindersList.last()
@@ -106,7 +106,7 @@ class SaveReminderViewModelTest {
             "",
             des, location, latLng.latitude, latLng.longitude
         )
-        //Condition: validate entered data of reminder
+        //Execute: validate entered data of reminder
         val result = saveReminderViewModel.validateEnteredData(reminderData)
         val snackBarMessage = saveReminderViewModel.showSnackBarInt.getOrAwaitValue()
 
@@ -122,7 +122,7 @@ class SaveReminderViewModelTest {
             title,
             des, location, latLng.latitude, latLng.longitude
         )
-        //Condition: validate entered aata of reminder
+        //Execute: validate entered aata of reminder
         val result = saveReminderViewModel.validateEnteredData(reminderData)
         //Verify
         assertThat(result, `is`(true))
@@ -130,7 +130,7 @@ class SaveReminderViewModelTest {
 
     @Test
     fun onClear_resetAllData() = runBlockingTest {
-        //Condition: clear data
+        //Execute: clear data
         saveReminderViewModel.onClear()
 
         //Verify

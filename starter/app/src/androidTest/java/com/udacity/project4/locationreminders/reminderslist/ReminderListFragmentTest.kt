@@ -119,7 +119,7 @@ class ReminderListFragmentTest {
 
     @Test
     fun reminder_isDisplayNoData() {
-        //Condition: Start fragment with no data
+        //Execute: Start fragment with no data
         val scenario = launchFragmentInContainer<ReminderListFragment>(Bundle(), R.style.AppTheme)
         dataBindingIdlingResource.monitorFragment(scenario)
 
@@ -135,7 +135,7 @@ class ReminderListFragmentTest {
         val location = "Hall"
         val latLng = LatLng(-33.87365, 151.20689)
 
-        //Condition: Save a reminder
+        //Execute: Save a reminder
         runBlocking {
             repository.saveReminder(
                 ReminderDTO(
@@ -167,7 +167,7 @@ class ReminderListFragmentTest {
             Navigation.setViewNavController(it.view!!, navController)
         }
 
-        //Condition
+        //Execute
         onView(withId(R.id.addReminderFAB)).perform(click())
 
         //Verify: Navigate to add reminder screen

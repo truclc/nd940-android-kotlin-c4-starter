@@ -135,7 +135,7 @@ class RemindersActivityTest :
         dataBindingIdlingResource.monitorActivity(activityScenario)
         Thread.sleep(3000)
 
-        //Condition: Click on the reminder on the list and verify that all the data is correct.
+        //Execute: Click on the reminder on the list and verify that all the data is correct.
         onView(withText(title)).perform(click())
 
         //Verify: The detail of reminder on screen
@@ -156,7 +156,7 @@ class RemindersActivityTest :
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
-        //Condition: Click add reminder
+        //Execute: Click add reminder
         onView(withId(R.id.addReminderFAB)).perform(click())
         onView(withId(R.id.reminderTitle)).perform(typeText(title))
         onView(isRoot()).perform(closeSoftKeyboard())
@@ -192,7 +192,7 @@ class RemindersActivityTest :
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
-        //Condition: Click add reminder
+        //Execute: Click add reminder
         onView(withId(R.id.addReminderFAB)).perform(click())
         //Add reminder title
         onView(withId(R.id.reminderTitle)).perform(typeText(title))
@@ -217,7 +217,7 @@ class RemindersActivityTest :
         val activityScenario = ActivityScenario.launch(RemindersActivity::class.java)
         dataBindingIdlingResource.monitorActivity(activityScenario)
 
-        //Condition: Click add reminder
+        //Execute: Click add reminder
         onView(withId(R.id.addReminderFAB)).perform(click())
 
         // openMap

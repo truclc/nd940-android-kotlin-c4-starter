@@ -63,7 +63,7 @@ class RemindersListViewModelTest {
         //Pause dispatcher so you can verify initial values.
         mainCoroutineRule.pauseDispatcher()
 
-        //Condition: Load reminder
+        //Execute: Load reminder
         remindersListViewModel.loadReminders()
 
         //Verify
@@ -90,7 +90,7 @@ class RemindersListViewModelTest {
         //Setup: return error
         reminderDataSource.setReturnError(true)
 
-        //Condition
+        //Execute
         remindersListViewModel.loadReminders()
 
         val snackBarMessage = remindersListViewModel.showSnackBar.getOrAwaitValue()
@@ -106,7 +106,7 @@ class RemindersListViewModelTest {
         //Setup: delete all reminder
         reminderDataSource.deleteAllReminders()
 
-        //Condition: Load reminder
+        //Execute: Load reminder
         remindersListViewModel.loadReminders()
 
         //Verify: size of reminder list is zezo
