@@ -113,6 +113,9 @@ class RemindersActivityTest :
         IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
     }
 
+    /**
+     * Test when click a reminder on the list and verify that all the data is correct.
+     */
     @Test
     fun reminder_displayDetail() = runBlocking {
         //Setup: Create a reminder and insert to the database
@@ -147,6 +150,11 @@ class RemindersActivityTest :
         activityScenario.close()
     }
 
+    /**
+     * Test when adding reminder follow these steps (Click add reminder button -> input title
+     * and description -> select a location and click save in map screen -> click save reminder button).
+     * Verify a message "Reminder Saved !" is displayed.
+     */
     @Test
     fun saveReminder_isSuccess() {
         //Setup: Create a reminder and insert to the database
@@ -183,6 +191,10 @@ class RemindersActivityTest :
         activityScenario.close()
     }
 
+    /**
+     * Test when adding a reminder but location is not selected.
+     * Verify that a message "Please select location" is displayed.
+     */
     @Test
     fun saveReminder_locationisEmpty_getErrorMessage() {
         //Setup: Create a reminder and insert to the database
@@ -211,6 +223,10 @@ class RemindersActivityTest :
         activityScenario.close()
     }
 
+    /**
+     * Test when adding a reminder but title is empty.
+     * Verify that a message "Please enter title" is displayed.
+     */
     @Test
     fun saveReminder_titleisEmpty_getErrorMessage() {
         // Startup list reminder screen.

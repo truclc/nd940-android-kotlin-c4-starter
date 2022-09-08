@@ -117,6 +117,9 @@ class ReminderListFragmentTest {
         IdlingRegistry.getInstance().unregister(dataBindingIdlingResource)
     }
 
+    /**
+     * Test when start fragment with no data, then TextView noDataTextView is displayed
+     */
     @Test
     fun reminder_isDisplayNoData() {
         //Execute: Start fragment with no data
@@ -127,6 +130,9 @@ class ReminderListFragmentTest {
         onView(withId(R.id.noDataTextView)).check(matches(isDisplayed()))
     }
 
+    /**
+     * Test when a reminder has been insert to the data, then title and description of reminder is displayed.
+     */
     @Test
     fun reminder_isDisplayListData() {
         //Setup: Create a reminder and insert to the database
@@ -156,6 +162,9 @@ class ReminderListFragmentTest {
         onView(withText(des)).check(matches(isDisplayed()))
     }
 
+    /**
+     * Test when add a reminder by perform click add reminder button, then navigate to add reminder screen.
+     */
     @Test
     fun clickAddReminder_navigateToAddReminder() {
         //Setup: Create reminders and insert to the database

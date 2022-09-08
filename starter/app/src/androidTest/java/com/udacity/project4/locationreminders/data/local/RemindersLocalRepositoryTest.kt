@@ -49,6 +49,10 @@ class RemindersLocalRepositoryTest {
         database.close()
     }
 
+    /**
+     * Test when get a reminder from repo by id.
+     * Verify the result data from repo contains the expected values.
+     */
     @Test
     fun saveReminder_retrievesReminder() = runBlocking {
         //Setup: Create a reminder and insert to the database
@@ -73,6 +77,10 @@ class RemindersLocalRepositoryTest {
         assertThat(result.data.longitude, `is`(reminder.longitude))
     }
 
+    /**
+     * Test when get a reminder from repo by id using getReminder() method.
+     * Verify result data from repo was not found by id cause reminder doesn't exist, then return result message error.
+     */
     @Test
     fun getReminder_idNotFound() = runBlocking {
         //Execute: Get the reminder by id from the database.
@@ -82,6 +90,10 @@ class RemindersLocalRepositoryTest {
         assertThat(result.message, `is`("Reminder not found!"))
     }
 
+    /**
+     * Test when delete all reminders of repo using deleteAllReminders() method.
+     * So, when get reminder from repo by getReminders() method will return success result but empty data.
+     */
     @Test
     fun deleteAllReminders_returnisEmpty() = runBlocking {
         //Setup: Create a reminder and insert to the database

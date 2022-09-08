@@ -62,6 +62,9 @@ class SaveReminderViewModelTest {
             SaveReminderViewModel(ApplicationProvider.getApplicationContext(), reminderDataSource)
     }
 
+    /**
+     * Test when show loading reminder, View model is showLoading
+     */
     @Test
     fun saveReminder_showLoading() = runBlockingTest {
         //Pause dispatcher so you can verify initial values.
@@ -81,6 +84,10 @@ class SaveReminderViewModelTest {
         assertThat(saveReminderViewModel.showLoading.getOrAwaitValue(), `is`(false))
     }
 
+    /**
+     * Test when show loading reminder, View model is loading success.
+     * Verify that data is validated with title, description and location.
+     */
     @Test
     fun saveReminder_success() = runBlockingTest {
         //Setup: Create a reminder
@@ -99,6 +106,9 @@ class SaveReminderViewModelTest {
         assertThat(item.location, `is`(reminderData.location))
     }
 
+    /**
+     * Test when validate title is empty, verify that snackBarMessage show message "Please enter title".
+     */
     @Test
     fun validateEnteredData_titleisEmpty_returnFalse() = runBlockingTest {
         //Setup: Create a reminder with empty title
@@ -115,6 +125,10 @@ class SaveReminderViewModelTest {
         assertThat(snackBarMessage, `is`(R.string.err_enter_title))
     }
 
+    /**
+     * Test when validate input using validateEnteredData() method.
+     * Verify that result return true.
+     */
     @Test
     fun validateEnteredData_validData_returnsTrue() = runBlockingTest {
         //Setup: Create a reminder
@@ -122,12 +136,16 @@ class SaveReminderViewModelTest {
             title,
             des, location, latLng.latitude, latLng.longitude
         )
-        //Execute: validate entered aata of reminder
+        //Execute: validate entered data of reminder
         val result = saveReminderViewModel.validateEnteredData(reminderData)
         //Verify
         assertThat(result, `is`(true))
     }
 
+    /**
+     * Test when resert all data of viewmodel using onClear() method
+     * Verify that all value of viewmodel is null
+     */
     @Test
     fun onClear_resetAllData() = runBlockingTest {
         //Execute: clear data

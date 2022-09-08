@@ -43,6 +43,10 @@ class RemindersDaoTest {
     //Close the database
     fun closeDatabase() = database.close()
 
+    /**
+     * Test when get a reminder by id using getReminderById() method.
+     * Verify result data from reminderDAO contains the expected value.
+     */
     @Test
     fun insertReminder_getById() = runBlockingTest {
         //Setup: Create a reminder and insert to the database
@@ -66,6 +70,10 @@ class RemindersDaoTest {
         assertThat(result.longitude, `is`(reminder.longitude))
     }
 
+    /**
+     * Test when delete all reminders using deleteAllReminders() method.
+     * Verify the result data from reminderDAO is empty.
+     */
     @Test
     fun deleteAll() = runBlockingTest {
         //Setup: Create reminders and insert to the database

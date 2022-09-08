@@ -58,6 +58,10 @@ class RemindersListViewModelTest {
             RemindersListViewModel(ApplicationProvider.getApplicationContext(), reminderDataSource)
     }
 
+    /**
+     * Test when listview model loading a reminder.
+     * Verify that the progress indicator is hidden.
+     */
     @Test
     fun loadReminders_loading() = runBlockingTest {
         //Pause dispatcher so you can verify initial values.
@@ -75,6 +79,10 @@ class RemindersListViewModelTest {
         assertThat(remindersListViewModel.showLoading.getOrAwaitValue(), `is`(false))
     }
 
+    /**
+     * Test when listview model loading a reminder.
+     * Verify that reminders list is not null.
+     */
     @Test
     fun loadReminders_success() = runBlockingTest {
         //Condition: Load reminder
@@ -85,6 +93,10 @@ class RemindersListViewModelTest {
         assertThat(remindersList, `is`(notNullValue()))
     }
 
+    /**
+     * Test when listview model loading a reminder but get a error.
+     * Verify that a message "Test getReminders exception" is displayed and show no data.
+     */
     @Test
     fun loadReminders_error() = runBlockingTest {
         //Setup: return error
@@ -101,6 +113,10 @@ class RemindersListViewModelTest {
         assertThat(showNoData, `is`(true))
     }
 
+    /**
+     * Test when listview model loading a reminder.
+     * Verify that listview model show no data cause list size is zero.
+     */
     @Test
     fun loadReminders_resultSuccess_noReminders() = runBlockingTest {
         //Setup: delete all reminder
@@ -109,7 +125,7 @@ class RemindersListViewModelTest {
         //Execute: Load reminder
         remindersListViewModel.loadReminders()
 
-        //Verify: size of reminder list is zezo
+        //Verify: size of reminder listview model is zero
         val loadedItems = remindersListViewModel.remindersList.getOrAwaitValue()
         assertThat(loadedItems.size, `is`(0))
         //Reminder showNoData is true
