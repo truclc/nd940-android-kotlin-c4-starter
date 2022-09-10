@@ -53,6 +53,7 @@ class RemindersListViewModelTest {
     @Before
     fun setupViewModel() {
         stopKoin()
+        // Create a reminder data source from FakeDataSource
         reminderDataSource = FakeDataSource(remindersDummy)
         remindersListViewModel =
             RemindersListViewModel(ApplicationProvider.getApplicationContext(), reminderDataSource)
@@ -99,7 +100,7 @@ class RemindersListViewModelTest {
      */
     @Test
     fun loadReminders_error() = runBlockingTest {
-        //Setup: return error
+        //Setup: return error is true
         reminderDataSource.setReturnError(true)
 
         //Execute

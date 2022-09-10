@@ -16,7 +16,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.nullValue
-import org.hamcrest.MatcherAssert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -57,6 +56,7 @@ class SaveReminderViewModelTest {
     fun setupViewModel() {
         //stop the original app koin
         stopKoin()
+        // Create a reminder data source from FakeDataSource
         reminderDataSource = FakeDataSource(remindersDummy)
         saveReminderViewModel =
             SaveReminderViewModel(ApplicationProvider.getApplicationContext(), reminderDataSource)
